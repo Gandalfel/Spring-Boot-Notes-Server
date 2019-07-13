@@ -1,6 +1,12 @@
 package com.example.knowhowtopost.repository;
 
-import com.example.knowhowtopost.user.User;
+import com.example.knowhowtopost.user.UserEntity;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends CrudRepository<User, Integer> { }
+@Repository
+public  interface UserRepository extends CrudRepository<UserEntity, Long> {
+
+    UserEntity findUserEntityByLogin(String login);
+
+}

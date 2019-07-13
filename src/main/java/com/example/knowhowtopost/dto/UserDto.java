@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @ToString
-public class UserDto {
+public class UserDto implements Serializable {
 
     @Getter
     @Setter

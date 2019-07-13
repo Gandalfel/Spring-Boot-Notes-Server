@@ -8,13 +8,13 @@ import javax.persistence.*;
 
 @Entity
 @ToString
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column
+    @Column(unique = true)
     @Getter
     @Setter
     private String login;
