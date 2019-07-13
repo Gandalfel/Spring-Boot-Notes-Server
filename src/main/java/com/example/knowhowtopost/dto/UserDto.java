@@ -19,6 +19,10 @@ public class UserDto implements Serializable {
     @Setter
     private String password;
 
+    @Getter
+    @Setter
+    private String email;
+
     public UserDto() { }
 
 }

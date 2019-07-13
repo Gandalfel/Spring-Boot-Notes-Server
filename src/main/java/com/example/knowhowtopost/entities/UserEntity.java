@@ -1,4 +1,4 @@
-package com.example.knowhowtopost.user;
+package com.example.knowhowtopost.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +23,10 @@ public class UserEntity {
     @Getter
     @Setter
     private String password;
+
+    @Column(unique = true)
+    @Getter
+    @Setter
+    private String email;
 
 }
