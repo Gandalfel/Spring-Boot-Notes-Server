@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @RestController
 @RequestMapping(path = "/REST/v1/AuthN")
 public class AuthNServlet {
@@ -20,42 +23,58 @@ public class AuthNServlet {
     @Autowired
     private UserRepository userRepository;
 
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean validateEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
+    }
+
     @PostMapping(path = "/signUp")
     public ResponseEntity<String> signIn(@RequestBody UserDto userDto) {
 
-        UserEntity userEntityTester = userRepository.findUserEntityByLogin(userDto.getLogin());
+        UserEntity userEntityByLogin = userRepository.findUserEntityByLogin(userDto.getLogin());
+        UserEntity userEntityByEmail = userRepository.findUserEntityByEmail(userDto.getEmail());
 
-        if (userEntityTester != null) {
+        if (userEntityByLogin != null) {
 
-            throw new InternalServerError("Login already exist. Choose another login.");
+            throw new InternalServerError("Chosen login isn't free. Choose another one.");
 
-        } else if (userDto.getLogin().length() <= 6 || userDto.getLogin().length() <= 16) {
+        } else if (userEntityByEmail != null) {
 
-            throw new InternalServerError("Chosen login is too short or too long. Login length must be longer equal or more than 5 and less than 15 words.");
+            throw new InternalServerError("Email is already used.");
 
-        } else if (userDto.getPassword().length() <= 9) {
+        } else if (userDto.getLogin().length() <= 6) {
 
-            throw new InternalServerError("Chosen password is too short. Password length must be longer equal or more than 8 words.");
+            throw new InternalServerError("Chosen login is too short or too long. Login length: 5-15.");
 
-        } else if (false /* EMAIL VALIDATION */) {
+        } else if (userDto.getPassword().length() <= 9 || userDto.getPassword().length() >= 31) {
 
-            throw new InternalServerError("Chosen email is incorrect. You should check if chosen email contains at (@), domain (.com, .org etc.).");
+            throw new InternalServerError("Chosen password is too short or too long. Password length: 8-30.");
+
+        } else if (!validateEmail(userDto.getEmail())) {
+
+            throw new InternalServerError("Bad email format.");
+
+        } else {
+
+            StringBuilder response = new StringBuilder();
+
+            UserEntity user = new UserEntity();
+            user.setLogin(userDto.getLogin());
+            user.setPassword(userDto.getPassword());
+            user.setEmail(userDto.getEmail());
+            userRepository.save(user);
+
+            for (UserEntity u : userRepository.findAll()) {
+                response.append(u.toString()).append("\n");
+            }
+
+            return new ResponseEntity<>(response.toString(), HttpStatus.OK);
 
         }
-
-        StringBuilder response = new StringBuilder();
-
-        UserEntity user = new UserEntity();
-        user.setLogin(userDto.getLogin());
-        user.setPassword(userDto.getPassword());
-        user.setEmail(userDto.getEmail());
-        userRepository.save(user);
-
-        for (UserEntity u : userRepository.findAll()) {
-            response.append(u.toString()).append("\n");
-        }
-
-        return new ResponseEntity<>(response.toString(), HttpStatus.OK);
 
     }
+
 }
