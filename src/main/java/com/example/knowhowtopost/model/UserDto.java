@@ -1,4 +1,4 @@
-package com.example.knowhowtopost.dto;
+package com.example.knowhowtopost.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

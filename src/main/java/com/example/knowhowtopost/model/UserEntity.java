@@ -1,4 +1,4 @@
-package com.example.knowhowtopost.entities;
+package com.example.knowhowtopost.model;
 
 import lombok.Getter;
 import lombok.Setter;

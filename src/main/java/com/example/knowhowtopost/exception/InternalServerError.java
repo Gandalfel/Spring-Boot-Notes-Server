@@ -1,4 +1,4 @@
-package com.example.knowhowtopost.exceptions;
+package com.example.knowhowtopost.exception;
 
 public class InternalServerError extends RuntimeException {
 
