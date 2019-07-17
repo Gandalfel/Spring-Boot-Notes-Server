@@ -1,10 +1,11 @@
 package com.example.knowhowtopost.controller;
 
-import com.example.knowhowtopost.model.UserDto;
-
+import com.example.knowhowtopost.model.dto.UserDto;
 import com.example.knowhowtopost.service.AuthNServiceSignIn;
 import com.example.knowhowtopost.service.AuthNServiceSignUp;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +30,16 @@ public class AuthNServlet {
     @PostMapping(path = "/signIn")
     public ResponseEntity<String> signIn(@RequestBody UserDto userDto) {
 
-        //return authNServiceSignIn.
+        if (authNServiceSignIn.userDataValidation(userDto)) {
+
+            return authNServiceSignIn.getUsersObjects(userDto);
+
+        }
+
+        return new ResponseEntity<>(
+                "You shouldn't see this message. The server encountered an error with validation your data",
+                        HttpStatus.CONFLICT
+        );
 
     }
 

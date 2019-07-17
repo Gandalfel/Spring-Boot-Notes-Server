@@ -1,6 +1,6 @@
 package com.example.knowhowtopost.repository;
 
-import com.example.knowhowtopost.model.UserEntity;
+import com.example.knowhowtopost.model.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

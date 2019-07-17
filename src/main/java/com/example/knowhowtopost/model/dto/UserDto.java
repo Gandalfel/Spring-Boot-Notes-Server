@@ -1,4 +1,4 @@
-package com.example.knowhowtopost.model;
+package com.example.knowhowtopost.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +13,10 @@ public class UserDto implements Serializable {
 
     @Getter
     @Setter
+    private int id;
+
+    @Getter
+    @Setter
     private String login;
 
     @Getter
@@ -23,6 +27,7 @@ public class UserDto implements Serializable {
     @Setter
     private String email;
 
+    /** Required no-args constructor.**/
     public UserDto() { }
 
 }

@@ -1,8 +1,8 @@
 package com.example.knowhowtopost.service;
 
 import com.example.knowhowtopost.exception.InternalServerError;
-import com.example.knowhowtopost.model.UserDto;
-import com.example.knowhowtopost.model.UserEntity;
+import com.example.knowhowtopost.model.dto.UserDto;
+import com.example.knowhowtopost.model.entity.UserEntity;
 import com.example.knowhowtopost.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
