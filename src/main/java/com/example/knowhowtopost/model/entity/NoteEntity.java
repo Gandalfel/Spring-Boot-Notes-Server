@@ -1,5 +1,6 @@
 package com.example.knowhowtopost.model.entity;
 
+import com.example.knowhowtopost.model.dao.TagDao;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -24,5 +25,9 @@ public class NoteEntity {
     @Getter
     @Setter
     private String content;
+
+    @Getter
+    @Setter
+    private TagDao tag;
 
 }
