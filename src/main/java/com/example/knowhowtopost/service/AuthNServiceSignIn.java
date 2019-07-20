@@ -50,7 +50,7 @@ public class AuthNServiceSignIn {
 
         ArrayList<NoteDao> notes = new ArrayList<>();
         for (NoteEntity n : noteRepository.findAll()) {
-            notes.add(new NoteDao(n.getTitle(), n.getContent(), n.getTag()));
+            notes.add(new NoteDao(n.getId(), n.getTitle(), n.getContent(), n.getTag()));
         }
 
         ArrayList<TagDao> tags = new ArrayList<>();

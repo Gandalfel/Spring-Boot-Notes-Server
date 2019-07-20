@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NoteRepository extends CrudRepository<NoteEntity, Long> {
 
+
 }

@@ -15,7 +15,6 @@ public class NoteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
-    @Setter
     private int id;
 
     @Getter
@@ -30,4 +29,12 @@ public class NoteEntity {
     @Setter
     private TagDao tag;
 
+    public NoteEntity(String title, String content, TagDao tag) {
+        this.title = title;
+        this.content = content;
+        this.tag = tag;
+    }
+
+    /** Required no-args constructor.**/
+    public NoteEntity() { }
 }

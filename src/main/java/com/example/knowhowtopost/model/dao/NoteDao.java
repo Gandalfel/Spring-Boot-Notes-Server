@@ -5,9 +5,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @ToString
-public class NoteDao {
+public class NoteDao implements Serializable {
+
+    @Getter
+    @Setter
+    private int id;
 
     @Getter
     @Setter
@@ -21,4 +27,6 @@ public class NoteDao {
     @Setter
     private TagDao tag;
 
+    /** Required no-args constructor.**/
+    public NoteDao() { }
 }
