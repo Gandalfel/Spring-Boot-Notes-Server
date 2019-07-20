@@ -19,6 +19,8 @@ public class AuthNServlet {
 
     @Autowired
     private AuthNServiceSignUp authNServiceSignUp;
+
+    @Autowired
     private AuthNServiceSignIn authNServiceSignIn;
 
     @PostMapping(path = "/signUp")
@@ -36,7 +38,6 @@ public class AuthNServlet {
             return authNServiceSignIn.getUsersObjects(userDto);
 
         }
-
         throw new InternalServerError(
                 "You shouldn't see this message. The server encountered an error with validation your data");
 

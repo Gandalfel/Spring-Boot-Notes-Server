@@ -9,6 +9,4 @@ import java.util.List;
 @Repository
 public interface TagRepository  extends CrudRepository<TagEntity, Long> {
 
-    List<TagEntity> getAll();
-
 }

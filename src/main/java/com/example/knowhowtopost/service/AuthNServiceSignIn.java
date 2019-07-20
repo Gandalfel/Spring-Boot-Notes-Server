@@ -23,7 +23,11 @@ public class AuthNServiceSignIn {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
     private NoteRepository noteRepository;
+
+    @Autowired
     private TagRepository tagRepository;
 
     public boolean userDataValidation(UserDto userDto) {
@@ -45,12 +49,12 @@ public class AuthNServiceSignIn {
     public ResponseEntity<UsersObjectsDto> getUsersObjects(UserDto userDto) {
 
         ArrayList<NoteDao> notes = new ArrayList<>();
-        for (NoteEntity n : noteRepository.getAll()) {
+        for (NoteEntity n : noteRepository.findAll()) {
             notes.add(new NoteDao(n.getTitle(), n.getContent(), n.getTag()));
         }
 
         ArrayList<TagDao> tags = new ArrayList<>();
-        for (TagEntity t : tagRepository.getAll()) {
+        for (TagEntity t : tagRepository.findAll()) {
             tags.add(new TagDao(t.getName(), t.getColor()));
         }
 
